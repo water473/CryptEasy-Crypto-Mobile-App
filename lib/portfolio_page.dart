@@ -13,50 +13,74 @@ class PortfolioPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Portfolio Page'),
+        backgroundColor: Colors.deepPurple,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Total Balance',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '\$${totalBalance.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 24),
-            Text(
-              'Holdings',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Expanded(
-              child: ListView.builder(
-                itemCount: holdings.length,
-                itemBuilder: (context, index) {
-                  final holding = holdings[index];
-                  return Card(
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child: Text(holding['symbol']),
-                      ),
-                      title: Text(holding['name']),
-                      subtitle: Text('Amount: ${holding['amount']}'),
-                      trailing: Text(
-                        '\$${holding['value'].toStringAsFixed(2)}',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  );
-                },
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.deepPurple, Colors.purpleAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Total Balance',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
               ),
-            ),
-          ],
+              SizedBox(height: 8),
+              Text(
+                '\$${totalBalance.toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              SizedBox(height: 24),
+              Text(
+                'Holdings',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              SizedBox(height: 8),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: holdings.length,
+                  itemBuilder: (context, index) {
+                    final holding = holdings[index];
+                    return Card(
+                      color: Colors.white24,
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Text(
+                            holding['symbol'],
+                            style: TextStyle(color: Colors.deepPurple),
+                          ),
+                        ),
+                        title: Text(
+                          holding['name'],
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          'Amount: ${holding['amount']}',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                        trailing: Text(
+                          '\$${holding['value'].toStringAsFixed(2)}',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
